@@ -1,25 +1,6 @@
-import cv2
-import tkinter as tk
-from tkinter import filedialog, messagebox
-
-from hough_lines import detect_hough_lines
-from hough_circles import detect_hough_circles
-from detect_polygons import detect_polygons
-
-print("Fenêtre ouverte ! Choisissez une image...")
-def choisir_image():
-    """Ouvre une boîte de dialogue pour choisir une image."""
-    root = tk.Tk()
-    root.withdraw()
-
-    filepath = filedialog.askopenfilename(
-        title="Choisir une image",
-        filetypes=[
-            ("Images", "*.jpg *.jpeg *.png *.bmp *.tif *.tiff"),
-            ("Tous les fichiers", "*.*")
-        ]
-    )
-    return filepath
+from hough_lines import interface_lignes
+from hough_circles import interface_cercles
+from approximation_polygonale import interface_rectangle
 
 
 def afficher_menu():
@@ -35,19 +16,6 @@ def afficher_menu():
 
 
 def main():
-    # Sélection de l'image
-    path = choisir_image()
-
-    if not path:
-        messagebox.showerror("Erreur", "Aucune image sélectionnée !")
-        return
-
-    image = cv2.imread(path)
-
-    if image is None:
-        messagebox.showerror("Erreur", "Impossible de charger l'image.")
-        return
-
     while True:
         choix = afficher_menu()
 
@@ -56,32 +24,22 @@ def main():
             break
 
         elif choix == "1":
-            img = detect_hough_lines(image.copy())
-            cv2.imshow("Détection des lignes", img)
+            interface_lignes()
 
         elif choix == "2":
-            img = detect_hough_circles(image.copy())
-            cv2.imshow("Détection des cercles", img)
+            interface_cercles()
 
         elif choix == "3":
-            img = detect_polygons(image.copy())
-            cv2.imshow("Détection des polygones", img)
+            interface_rectangle()
 
         elif choix == "4":
-            img1 = detect_hough_lines(image.copy())
-            img2 = detect_hough_circles(image.copy())
-            img3 = detect_polygons(image.copy())
-
-            cv2.imshow("Lignes", img1)
-            cv2.imshow("Cercles", img2)
-            cv2.imshow("Polygones", img3)
+            interface_lignes()
+            interface_cercles()
+            interface_rectangle()
 
         else:
             print("❌ Choix invalide, réessayez.")
             continue
-
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
