@@ -1,11 +1,11 @@
 from hough_lines import interface_lignes
-from hough_circles import interface_cercles
+from hough_cercles import interface_cercles
 from approximation_polygonale import interface_rectangle
 
 
 def afficher_menu():
     print("\n===== MENU DÉTECTION DE FORMES =====")
-    print("1 - Détecter les lignes (HoughLinesP)")
+    print("1 - Détecter les lignes (HoughLines)")
     print("2 - Détecter les cercles (HoughCircles)")
     print("3 - Détecter les rectangles / polygones")
     print("4 - Appliquer toutes les méthodes")
