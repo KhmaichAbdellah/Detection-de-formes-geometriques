@@ -20,7 +20,7 @@ def choisir_image():
     return filepath
 
 # =========================
-# Détection (ton code original)
+# Détection de cercles 
 # =========================
 def lancer_detection_cercle(image_path):
     if not image_path:
@@ -103,12 +103,6 @@ def interface_cercles():
             selected_image.set(img)
             label.config(text=f"Image sélectionnée :\n{img.split('/')[-1]}")
 
-    # Bouton changer image
-    # def btn_change():
-    #     img = choisir_image()
-    #     if img:
-    #         selected_image.set(img)
-    #         label.config(text=f"Nouvelle image :\n{img.split('/')[-1]}")
 
     # Bouton lancer
     def btn_start():
@@ -116,7 +110,6 @@ def interface_cercles():
 
     # Widgets
     tk.Button(root, text="📂 Charger une image", width=25, command=btn_load).pack(pady=35)
-    #tk.Button(root, text="🔄 Changer d'image", width=25, command=btn_change).pack(pady=5)
     tk.Button(root, text="▶ Lancer la détection", width=25, command=btn_start).pack(pady=15)
 
     label = tk.Label(root, text="Aucune image sélectionnée.", fg="blue")
